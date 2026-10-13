@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Távola · RPG de mesa sem mestre</title>
-<meta name="description" content="Távola é um jogo de RPG de mesa para grupos sem mestre. O jogo conduz a aventura: narra, mostra o mapa, rola os dados e joga os inimigos. Grátis e de código aberto.">
+<title>Távola · RPG de mesa com mestre de IA</title>
+<meta name="description" content="Távola é um jogo de RPG de mesa para grupos sem mestre. Uma IA narra e improvisa; o jogo cuida do mapa, dos dados e das regras. Grátis e de código aberto.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=Almendra:wght@400;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fondamento&family=Germania+One&family=Grenze+Gotisch:wght@500;700&family=IM+Fell+English&family=Lora:wght@400;600&family=Marcellus&family=Uncial+Antiqua&display=swap">
 <style>
 /* Layout: página de entrada do jogo. Cabeçalho, chamada com o botão de baixar e uma cena do jogo, recursos, três passos, os oito temas (que trocam a cara da própria página), dúvidas e rodapé. Toda cor e letra vem das variáveis do tema. */
@@ -109,12 +109,12 @@ details p { padding-top: 8px; }
     <div class="texto">
       <p class="selos">Grátis · Código aberto · Windows e Linux</p>
       <h1>Uma mesa de RPG sem cabeceira.</h1>
-      <p>Na távola redonda ninguém senta na ponta. Aqui o jogo conduz a aventura no lugar do mestre: narra, mostra o mapa, rola os dados e joga os inimigos. O grupo só joga.</p>
+      <p>Na távola redonda ninguém senta na ponta. Aqui o lugar do mestre é de uma IA: ela narra, dá voz ao mundo e responde ao que o grupo inventar. O jogo cuida do mapa, dos dados e das regras.</p>
       <div class="acoes">
         <span class="botao embreve">Baixar para Windows · em breve</span>
         <span class="botao vazado embreve">Baixar para Linux · em breve</span>
       </div>
-      <p class="apagado">Sem conta, sem assinatura e sem internet para jogar.</p>
+      <p class="apagado">Só quem abre a mesa precisa de uma IA. Os outros instalam e entram.</p>
     </div>
 
     <div class="cena" role="img" aria-label="Uma cena de combate do jogo: o grupo, o mapa da cripta e a narração">
@@ -140,12 +140,12 @@ details p { padding-top: 8px; }
   <section class="faixa" id="recursos"><div class="dentro">
     <div class="abre"><h2>O que vem na caixa</h2></div>
     <div class="grade">
-      <div class="cartao"><h3>O jogo é o mestre</h3><p>A aventura já vem escrita. O jogo narra cada cena, oferece os caminhos e resolve os combates pelas regras.</p></div>
+      <div class="cartao"><h3>Um mestre de IA</h3><p>Ele narra cada cena, interpreta os personagens do mundo e improvisa quando o grupo foge do roteiro.</p></div>
       <div class="cartao"><h3>Mapa de cima e de lado</h3><p>Veja a masmorra de cima, como um mapa, ou de lado, como uma mesa de verdade. De lado, gire a câmera à vontade.</p></div>
-      <div class="cartao"><h3>Dado na tela ou na mão</h3><p>Role pelo jogo ou jogue o seu dado de verdade e diga o resultado. A conta ele faz.</p></div>
-      <div class="cartao"><h3>Editor de aventuras</h3><p>Monte as suas: mapas, personagens, cenas e finais. O jogo confere se o combate está justo e se todo caminho tem saída.</p></div>
-      <div class="cartao"><h3>Crie com a sua IA, se quiser</h3><p>Quem usa o Claude ou outra IA pode pedir uma aventura inteira pelo conector e ajustar no editor. Para jogar, não precisa de IA nenhuma.</p></div>
-      <div class="cartao"><h3>Aberto e sem servidor</h3><p>O código é aberto e tudo roda nos computadores do grupo. Não existe conta, anúncio nem coleta de dados.</p></div>
+      <div class="cartao"><h3>As regras ficam com o jogo</h3><p>O mestre conta a história, mas quem rola o dado, faz a conta e guarda a ficha é o jogo. Dá para usar o seu dado de verdade e só dizer o resultado.</p></div>
+      <div class="cartao"><h3>Editor de aventuras</h3><p>Monte as suas: mapas, personagens e cenas, à mão ou pedindo à IA. O mestre usa o que você preparou.</p></div>
+      <div class="cartao"><h3>Traga a sua IA</h3><p>Três jeitos de ligar o mestre: pelo conector MCP, pelo Claude Code embutido no jogo ou com uma chave de API.</p></div>
+      <div class="cartao"><h3>Aberto e sem servidor nosso</h3><p>O código é aberto e o jogo roda nos computadores do grupo. Não existe conta na Távola, anúncio nem coleta de dados.</p></div>
     </div>
   </div></section>
 
@@ -153,8 +153,8 @@ details p { padding-top: 8px; }
     <div class="abre"><h2>Como funciona</h2></div>
     <ol class="passos">
       <li><h3>Baixe e abra</h3><p>Cada jogador baixa o jogo no próprio computador. Se o Windows avisar que não conhece o programa, veja a dúvida sobre isso mais abaixo.</p></li>
-      <li><h3>Abram a mesa</h3><p>Uma pessoa abre a mesa e escolhe a aventura. Os outros, na mesma rede, entram com o código que aparece na tela.</p></li>
-      <li><h3>Joguem</h3><p>Cada um escolhe o personagem e o tema. Daí em diante o jogo conduz, e a campanha fica salva para a próxima sessão.</p></li>
+      <li><h3>Abram a mesa</h3><p>Uma pessoa abre a mesa, liga a IA dela e escolhe a aventura. Os outros, na mesma rede, entram com o código que aparece na tela.</p></li>
+      <li><h3>Joguem</h3><p>Cada um escolhe o personagem e o tema. Daí em diante o mestre conduz, e a campanha fica salva para a próxima sessão.</p></li>
     </ol>
   </div></section>
 
@@ -166,8 +166,8 @@ details p { padding-top: 8px; }
   <section class="faixa" id="duvidas"><div class="dentro">
     <div class="abre"><h2>Dúvidas</h2></div>
     <div>
-      <details><summary>É grátis mesmo?</summary><p>Vai ser. O jogo será de código aberto, sem compra, assinatura nem anúncio.</p></details>
-      <details><summary>Preciso de inteligência artificial para jogar?</summary><p>Não. As aventuras já vêm escritas e o jogo roda sem internet. A IA é opcional e serve só para quem quer criar aventuras mais rápido.</p></details>
+      <details><summary>É grátis mesmo?</summary><p>O jogo vai ser: código aberto, sem compra nem anúncio. A IA que faz o papel do mestre é por conta de quem abre a mesa.</p></details>
+      <details><summary>Preciso de inteligência artificial para jogar?</summary><p>Quem abre a mesa precisa: um plano do Claude ou uma chave de API. Os outros jogadores não precisam de nada além do jogo. Uma versão que roda sem IA está no roteiro.</p></details>
       <details><summary>O Windows disse que protegeu o computador. E agora?</summary><p>O aviso aparece em programas sem assinatura digital paga. Escolha "Mais informações" e depois "Executar assim mesmo". O instalador é gerado a partir do código aberto, que qualquer pessoa pode conferir.</p></details>
       <details><summary>Dá para jogar à distância?</summary><p>Por enquanto a mesa funciona com todos na mesma rede. O jogo à distância está no roteiro.</p></details>
       <details><summary>Tem para Mac ou celular?</summary><p>Ainda não. Esta versão é para Windows e Linux.</p></details>
