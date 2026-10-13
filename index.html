@@ -4,195 +4,215 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Távola · A mesa não tem cabeceira</title>
-<meta name="description" content="Távola é um jogo de RPG de mesa para o grupo que não tem mestre. Uma IA narra e improvisa; o jogo cuida do mapa, dos dados e das regras. Em construção.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=Almendra:wght@400;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fondamento&family=Germania+One&family=Grenze+Gotisch:wght@500;700&family=IM+Fell+English&family=Lora:wght@400;600&family=Marcellus&family=Uncial+Antiqua&display=swap">
+<meta name="description" content="Távola é um jogo de RPG de mesa para o grupo que não tem mestre. Uma IA narra e improvisa, e o jogo cuida do mapa, dos dados e das regras. Grátis. Em construção.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=Almendra:wght@400;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fondamento&family=Germania+One&family=Grenze+Gotisch:wght@500;700&family=IM+Fell+English:ital@0;1&family=Lora:wght@400;600&family=Marcellus&family=Uncial+Antiqua&display=swap">
 <style>
-/* Layout: página de entrada do jogo. Cabeçalho, chamada com o botão de baixar e uma cena do jogo, recursos, três passos, os oito temas (que trocam a cara da própria página), dúvidas e rodapé. Toda cor e letra vem das variáveis do tema. */
-:root { --fundo: #e8dcb9; }
+/* Layout: a página é a mesa. Abre com a távola vista de cima e uma cadeira vazia, a do mestre; depois separa o que é do mestre e o que é do jogo, mostra o mapa que inclina e gira, os temas, as portas da IA e o diário de construção. Toda cor e letra vem das variáveis do tema; o padrão é Mesa à noite. */
+:root { --fundo: #0e1719; color-scheme: dark; }
 .pagina {
-  --fundo: #e8dcb9; --painel: #f1e8cb; --chao: #d8c99d; --linha: #7b6234; --texto: #2b2113; --apagado: #5f4d2c; --destaque: #2f4a34; --no-destaque: #f1e8cb; --perigo: #8a2a1c; --bom: #2f4a34;
-  --titulo: "Almendra", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --raio: 0px; --peso-titulo: 700;
+  --fundo: #0e1719; --painel: #1c2d31; --chao: #22363a; --linha: #2c4247; --texto: #e9e0c9; --apagado: #9aa79f; --destaque: #cfa650; --no-destaque: #1a1405; --perigo: #c8574a; --bom: #7fb069;
+  --titulo: "IM Fell English", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --raio: 0px; --peso-titulo: 400;
 }
-.pagina[data-tema="mesa-a-noite"] { --fundo: #0e1719; --painel: #1c2d31; --chao: #22363a; --linha: #2c4247; --texto: #e9e0c9; --apagado: #9aa79f; --destaque: #cfa650; --no-destaque: #1a1405; --perigo: #c8574a; --bom: #7fb069; --titulo: "IM Fell English", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --peso-titulo: 400; }
-.pagina[data-tema="tavola-redonda"] { --fundo: #430c17; --painel: #5e1423; --chao: #6d1a2b; --linha: #d9b24c; --texto: #f5ead0; --apagado: #dcc7a4; --destaque: #e3bd55; --no-destaque: #2a0810; --perigo: #120a0c; --bom: #e3bd55; --titulo: "Uncial Antiqua", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --peso-titulo: 400; }
-.pagina[data-tema="salao-elfico"] { --fundo: #0f1d24; --painel: #17303a; --chao: #1c3a45; --linha: #5f8f8a; --texto: #e6f0ee; --apagado: #a5bdb9; --destaque: #a8d8cf; --no-destaque: #0f1d24; --perigo: #d9667a; --bom: #8fd0a0; --titulo: "Marcellus", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --raio: 14px; --peso-titulo: 400; }
-.pagina[data-tema="forja-ana"] { --fundo: #1c1b1a; --painel: #2b2927; --chao: #33302d; --linha: #5a544d; --texto: #ece6dc; --apagado: #a9a196; --destaque: #e8742a; --no-destaque: #1c1107; --perigo: #c23b2e; --bom: #9fb36a; --titulo: "Germania One", "Segoe UI", sans-serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --peso-titulo: 400; }
-.pagina[data-tema="reino-sombrio"] { --fundo: #0b0b0c; --painel: #18171a; --chao: #201e22; --linha: #3a363c; --texto: #d9d4cc; --apagado: #918b93; --destaque: #d23a2a; --no-destaque: #ffffff; --perigo: #d23a2a; --bom: #7d8a6a; --titulo: "Grenze Gotisch", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; }
-.pagina[data-tema="vila-das-colinas"] { --fundo: #f4efd9; --painel: #fbf6e6; --chao: #dfe6bf; --linha: #b9a77a; --texto: #33291b; --apagado: #6a5a41; --destaque: #3f6630; --no-destaque: #ffffff; --perigo: #b5482f; --bom: #4d7a3a; --titulo: "Fondamento", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --raio: 12px; --peso-titulo: 400; }
-.pagina[data-tema="grimorio-arcano"] { --fundo: #150f2b; --painel: #221a45; --chao: #2a2157; --linha: #5a4a9c; --texto: #ece7ff; --apagado: #b3a9da; --destaque: #c9a8ff; --no-destaque: #150f2b; --perigo: #ff6f91; --bom: #7fe0c0; --titulo: "Cinzel", Georgia, serif; --corpo: "Lora", Georgia, serif; --raio: 4px; }
+.pagina[data-tema="terras-antigas"] { --fundo: #e8dcb9; --painel: #f1e8cb; --chao: #d8c99d; --linha: #7b6234; --texto: #2b2113; --apagado: #5f4d2c; --destaque: #2f4a34; --no-destaque: #f1e8cb; --perigo: #8a2a1c; --bom: #2f4a34; --titulo: "Almendra", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --peso-titulo: 700; }
+.pagina[data-tema="tavola-redonda"] { --fundo: #430c17; --painel: #5e1423; --chao: #6d1a2b; --linha: #d9b24c; --texto: #f5ead0; --apagado: #dcc7a4; --destaque: #e3bd55; --no-destaque: #2a0810; --perigo: #120a0c; --bom: #e3bd55; --titulo: "Uncial Antiqua", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; }
+.pagina[data-tema="salao-elfico"] { --fundo: #0f1d24; --painel: #17303a; --chao: #1c3a45; --linha: #5f8f8a; --texto: #e6f0ee; --apagado: #a5bdb9; --destaque: #a8d8cf; --no-destaque: #0f1d24; --perigo: #d9667a; --bom: #8fd0a0; --titulo: "Marcellus", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --raio: 14px; }
+.pagina[data-tema="forja-ana"] { --fundo: #1c1b1a; --painel: #2b2927; --chao: #33302d; --linha: #5a544d; --texto: #ece6dc; --apagado: #a9a196; --destaque: #e8742a; --no-destaque: #1c1107; --perigo: #c23b2e; --bom: #9fb36a; --titulo: "Germania One", "Segoe UI", sans-serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; }
+.pagina[data-tema="reino-sombrio"] { --fundo: #0b0b0c; --painel: #18171a; --chao: #201e22; --linha: #3a363c; --texto: #d9d4cc; --apagado: #918b93; --destaque: #d23a2a; --no-destaque: #ffffff; --perigo: #d23a2a; --bom: #7d8a6a; --titulo: "Grenze Gotisch", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --peso-titulo: 700; }
+.pagina[data-tema="vila-das-colinas"] { --fundo: #f4efd9; --painel: #fbf6e6; --chao: #dfe6bf; --linha: #b9a77a; --texto: #33291b; --apagado: #6a5a41; --destaque: #3f6630; --no-destaque: #ffffff; --perigo: #b5482f; --bom: #4d7a3a; --titulo: "Fondamento", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --raio: 12px; }
+.pagina[data-tema="grimorio-arcano"] { --fundo: #150f2b; --painel: #221a45; --chao: #2a2157; --linha: #5a4a9c; --texto: #ece7ff; --apagado: #b3a9da; --destaque: #c9a8ff; --no-destaque: #150f2b; --perigo: #ff6f91; --bom: #7fe0c0; --titulo: "Cinzel", Georgia, serif; --corpo: "Lora", Georgia, serif; --raio: 4px; --peso-titulo: 700; }
 
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--fundo); }
-.pagina { background: var(--fundo); color: var(--texto); font-family: var(--corpo); font-size: 19px; line-height: 1.5; min-height: 100%; }
-.dentro { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.pagina { background: var(--fundo); color: var(--texto); font-family: var(--corpo); font-size: 19px; line-height: 1.5; min-height: 100%; overflow-x: hidden; }
+.dentro { max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
 h1, h2, h3 { font-family: var(--titulo); font-weight: var(--peso-titulo); margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(38px, 6.4vw, 68px); line-height: 1.04; }
-h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
-h3 { font-size: 23px; line-height: 1.2; }
-p { margin: 0; }
+h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.02; }
+h2 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.08; }
+h3 { font-size: 24px; line-height: 1.2; }
+p { margin: 0; max-width: 64ch; }
 a { color: var(--texto); }
 .apagado { color: var(--apagado); }
+.rot { font-size: 16px; color: var(--destaque); }
 :focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; }
 
-.topo { border-bottom: 1px solid var(--linha); }
-.topo .dentro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-block: 14px; }
-.marca { display: flex; align-items: center; gap: 10px; font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 28px; text-decoration: none; }
+.topo .dentro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 24px; padding-block: 16px; }
+.marca { display: flex; align-items: center; gap: 10px; font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 30px; text-decoration: none; }
 .marca svg { width: 34px; height: 34px; flex: none; }
-.menu { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 18px; }
+.menu { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 22px; font-size: 18px; }
 .menu a { text-decoration: none; padding-block: 10px; }
 .menu a:hover { text-decoration: underline; }
+.obra { border: 1px solid var(--linha); border-radius: var(--raio); padding: 3px 10px; font-size: 16px; color: var(--apagado); }
 
-.chamada .dentro { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px; align-items: center; padding-block: clamp(36px, 7vw, 80px); }
-.chamada .texto { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-.selos { color: var(--apagado); font-size: 17px; }
-.acoes { display: flex; flex-wrap: wrap; gap: 12px; }
-.botao { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 10px 26px; font-family: var(--corpo); font-size: 20px; font-weight: 700; text-decoration: none; border: 2px solid var(--destaque); border-radius: var(--raio); background: var(--destaque); color: var(--no-destaque); }
-.botao.vazado { background: transparent; color: var(--texto); border-color: var(--linha); font-weight: 400; }
-.botao.embreve { opacity: 0.6; cursor: default; }
-.obra { background: var(--painel); border-bottom: 1px solid var(--linha); font-size: 17px; }
-.obra .dentro { display: block; padding-block: 10px; }
-
-.cena { min-width: 0; background: var(--painel); border: 2px solid var(--linha); border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; font-size: 16px; }
-.cena .barra { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--linha); }
-.cena .barra b { font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 22px; }
-.cena .corpo { display: grid; grid-template-columns: 138px minmax(0, 1fr); }
-.cena .grupo { padding: 10px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--linha); background: var(--fundo); }
-.heroi { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 6px 9px; display: flex; flex-direction: column; gap: 4px; }
-.heroi.vez { border: 2px solid var(--destaque); }
-.heroi b { font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 17px; }
-.vida { height: 6px; background: var(--fundo); } .vida i { display: block; height: 100%; background: var(--bom); } .vida.baixa i { background: var(--perigo); }
-.cena svg { display: block; width: 100%; height: auto; background: var(--fundo); }
-.m-chao { fill: var(--chao); } .m-grade { stroke: var(--linha); fill: none; opacity: 0.7; } .m-alcance { fill: var(--destaque); fill-opacity: 0.2; }
-.m-heroi { fill: var(--painel); stroke: var(--texto); stroke-width: 2; } .m-vez { stroke: var(--destaque); stroke-width: 4; } .m-inim { fill: var(--perigo); stroke: var(--texto); stroke-width: 1.5; }
-.cena .fala { padding: 12px 14px; border-top: 1px solid var(--linha); display: flex; flex-direction: column; gap: 2px; }
-.cena .fala span { font-size: 14px; color: var(--apagado); }
-.cena .fala p { font-size: 19px; font-style: italic; line-height: 1.3; }
+.abre .dentro { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 32px 48px; align-items: center; padding-block: clamp(24px, 5vw, 56px) clamp(40px, 7vw, 88px); }
+.abre .fala { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.narra { font-family: var(--titulo); font-style: italic; font-size: 22px; line-height: 1.35; color: var(--apagado); border-left: 2px solid var(--destaque); padding-left: 14px; max-width: 46ch; }
+.botao { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 10px 28px; font-family: var(--corpo); font-size: 20px; font-weight: 700; border: 2px solid var(--destaque); border-radius: var(--raio); background: var(--destaque); color: var(--no-destaque); opacity: 0.62; cursor: default; align-self: flex-start; }
+.tavola { min-width: 0; }
+.tavola svg { display: block; width: 100%; height: auto; max-width: 520px; margin-inline: auto; }
+.t-mesa { fill: var(--painel); stroke: var(--linha); stroke-width: 5; } .t-aro { fill: none; stroke: var(--linha); stroke-width: 1.5; }
+.t-cadeira { fill: var(--chao); stroke: var(--linha); stroke-width: 2; } .t-ficha { fill: var(--painel); stroke-width: 5; }
+.t-letra { font-family: var(--titulo); font-size: 26px; fill: var(--texto); text-anchor: middle; } .t-nome { font-family: var(--corpo); font-size: 16px; fill: var(--apagado); text-anchor: middle; }
+.t-chama { fill: var(--destaque); } .t-brilho { fill: var(--destaque); opacity: 0.16; } .t-vela { fill: var(--texto); }
+.t-mestre { font-family: var(--corpo); font-size: 16px; fill: var(--destaque); text-anchor: middle; }
 
 .faixa { border-top: 1px solid var(--linha); }
-.faixa .dentro { padding-block: clamp(40px, 6vw, 72px); display: flex; flex-direction: column; gap: 26px; }
-.faixa .abre { display: flex; flex-direction: column; gap: 8px; max-width: 62ch; }
-.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; }
-.cartao { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-ol.passos { list-style: none; margin: 0; padding: 0; counter-reset: passo; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; }
-ol.passos li { counter-increment: passo; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-ol.passos li::before { content: counter(passo); font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 44px; line-height: 1; color: var(--destaque); }
-.temas { display: flex; flex-wrap: wrap; gap: 10px; }
-.temas button { font-family: var(--corpo); font-size: 18px; cursor: pointer; min-height: 48px; padding: 8px 16px; background: var(--painel); color: var(--texto); border: 1px solid var(--linha); border-radius: var(--raio); display: inline-flex; align-items: center; gap: 10px; }
+.faixa .dentro { padding-block: clamp(44px, 7vw, 84px); display: flex; flex-direction: column; gap: 28px; }
+.cab { display: flex; flex-direction: column; gap: 8px; }
+.dois { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0; border: 1px solid var(--linha); border-radius: var(--raio); overflow: hidden; }
+.lado { padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.lado + .lado { background: var(--painel); }
+.lado ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+
+.mapa-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 28px 48px; align-items: center; }
+.palco { perspective: 900px; height: 340px; display: flex; align-items: center; justify-content: center; min-width: 0; }
+.tabuleiro { --a: 56deg; --g: 24deg; --alt: 1; --op: 0; width: min(340px, 74vw); aspect-ratio: 6 / 5; position: relative; transform-style: preserve-3d; transform: rotateX(var(--a)) rotateZ(var(--g)); transition: transform 0.8s; background-color: var(--chao); background-image: linear-gradient(var(--linha) 1px, transparent 1px), linear-gradient(90deg, var(--linha) 1px, transparent 1px); background-size: 16.666% 20%; border: 6px solid var(--linha); }
+.peca { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; transform-style: preserve-3d; }
+.peca .ficha { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--cor); background: #cdbb8c; overflow: hidden; opacity: var(--op); transform: rotateZ(calc(-1 * var(--g))); transition: opacity 0.5s, transform 0.8s; }
+.peca .pe { position: absolute; left: 5px; bottom: 50%; width: 34px; height: 54px; transform-origin: bottom center; transform: rotateZ(calc(-1 * var(--g))) rotateX(-90deg) scaleY(var(--alt)); transition: transform 0.8s; background: #f7f0d8; border: 2px solid var(--cor); border-radius: 17px 17px 2px 2px; overflow: hidden; }
+.peca svg { display: block; width: 100%; height: 100%; }
+.peca .sombra { position: absolute; inset: 6px; border-radius: 50%; background: #000000; opacity: 0.3; }
+.comandos { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.botoes { display: flex; flex-wrap: wrap; gap: 8px; }
+button { font-family: var(--corpo); font-size: 18px; cursor: pointer; min-height: 48px; padding: 8px 16px; background: var(--painel); color: var(--texto); border: 1px solid var(--linha); border-radius: var(--raio); }
+button[aria-pressed="true"] { border: 2px solid var(--destaque); font-weight: 700; }
+.giro { display: flex; flex-direction: column; gap: 4px; max-width: 320px; }
+.giro input { width: 100%; accent-color: var(--destaque); height: 32px; }
+.temas button { display: inline-flex; align-items: center; gap: 10px; }
 .temas button i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--linha); flex: none; }
-.temas button[aria-pressed="true"] { border: 2px solid var(--destaque); font-weight: 700; }
-details { border-bottom: 1px solid var(--linha); padding-block: 14px; max-width: 76ch; }
-summary { cursor: pointer; font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 22px; }
-details p { padding-top: 8px; }
-.final .dentro { align-items: center; text-align: center; }
-.final .acoes { justify-content: center; }
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 18px; }
+.cartao { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+ol.diario { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+ol.diario li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 6px 20px; padding-block: 16px; border-top: 1px solid var(--linha); }
+ol.diario .quando { font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 22px; color: var(--apagado); }
+ol.diario li.agora .quando { color: var(--destaque); }
+ol.diario li > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fim .dentro { align-items: center; text-align: center; }
+.fim .botao { align-self: center; }
 .rodape { border-top: 1px solid var(--linha); font-size: 17px; }
-.rodape .dentro { padding-block: 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; color: var(--apagado); }
-.rodape a { color: var(--apagado); }
+.rodape .dentro { padding-block: 24px; color: var(--apagado); }
+@media (prefers-reduced-motion: reduce) { .tabuleiro, .peca .pe, .peca .ficha { transition: none; } }
 </style>
 </head>
 <body>
-<div class="pagina" id="pagina" data-tema="terras-antigas">
+<div class="pagina" id="pagina" data-tema="mesa-a-noite">
 
   <header class="topo"><div class="dentro">
-    <a class="marca" href="#inicio">
+    <a class="marca" href="#mesa">
       <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="currentColor"/><path d="M20 3V12 M20 28V37 M3 20H12 M28 20H37 M8 8L14.4 14.4 M25.6 25.6L32 32 M32 8L25.6 14.4 M14.4 25.6L8 32" stroke="currentColor" stroke-width="2"/></svg>
       Távola
     </a>
     <nav class="menu" aria-label="Seções">
-      <a href="#recursos">Recursos</a><a href="#como">Como funciona</a><a href="#temas">Temas</a><a href="#duvidas">Dúvidas</a>
+      <a href="#quem">Quem faz o quê</a><a href="#mapa">O mapa</a><a href="#temas">Temas</a><a href="#diario">Diário de construção</a><span class="obra">Em construção</span>
     </nav>
   </div></header>
 
-  <p class="obra"><span class="dentro">Em construção. O jogo ainda está sendo feito e não há versão para baixar. Esta página mostra o que ele vai ser.</span></p>
-
-  <section class="chamada" id="inicio"><div class="dentro">
-    <div class="texto">
-      <p class="selos">Grátis · Código aberto · Windows e Linux</p>
-      <h1>Uma mesa de RPG sem cabeceira.</h1>
-      <p>Na távola redonda ninguém senta na ponta. Aqui o lugar do mestre é de uma IA: ela narra, dá voz ao mundo e responde ao que o grupo inventar. O jogo cuida do mapa, dos dados e das regras.</p>
-      <div class="acoes">
-        <span class="botao embreve">Baixar para Windows · em breve</span>
-        <span class="botao vazado embreve">Baixar para Linux · em breve</span>
-      </div>
-      <p class="apagado">Só quem abre a mesa precisa de uma IA. Os outros instalam e entram.</p>
+  <section class="abre" id="mesa"><div class="dentro">
+    <div class="fala">
+      <p class="narra">Vocês chegam a uma mesa redonda. Há lugar para todos, e nenhuma cadeira é maior que a outra. Numa delas só há uma vela acesa.</p>
+      <h1>A mesa não tem cabeceira.</h1>
+      <p>Távola é um jogo de RPG de mesa para o grupo que não tem mestre. A cadeira dele fica com uma IA, que narra e improvisa. O jogo cuida do mapa, dos dados e das regras, e todo mundo joga.</p>
+      <span class="botao">Baixar · em breve</span>
+      <p class="apagado">Ainda não há versão para baixar. Vai ser grátis, para Windows e Linux.</p>
     </div>
+    <div class="tavola">
+      <svg viewBox="0 0 440 440" role="img" aria-label="Uma mesa redonda vista de cima, com quatro jogadores e uma cadeira ocupada só por uma vela: a do mestre">
+        <circle class="t-brilho" cx="220" cy="62" r="62"/>
+        <circle class="t-cadeira" cx="220" cy="62" r="36"/>
+        <circle class="t-cadeira" cx="370" cy="171" r="36"/><circle class="t-cadeira" cx="313" cy="348" r="36"/><circle class="t-cadeira" cx="127" cy="348" r="36"/><circle class="t-cadeira" cx="70" cy="171" r="36"/>
+        <circle class="t-mesa" cx="220" cy="220" r="124"/><circle class="t-aro" cx="220" cy="220" r="102"/><circle class="t-aro" cx="220" cy="220" r="14"/>
+        <path class="t-aro" d="M220 118V206 M220 234V322 M118 220H206 M234 220H322"/>
+        <rect class="t-vela" x="214" y="56" width="12" height="22"/><path class="t-chama" d="M220 30 Q230 44 220 56 Q210 44 220 30Z"/>
+        <text class="t-mestre" x="220" y="16">o mestre</text>
+        <circle class="t-ficha" cx="370" cy="171" r="26" stroke="#a8771c"/><text class="t-letra" x="370" y="180">B</text><text class="t-nome" x="370" y="228">Bruk</text>
+        <circle class="t-ficha" cx="313" cy="348" r="26" stroke="#2f8f78"/><text class="t-letra" x="313" y="357">S</text><text class="t-nome" x="313" y="405">Sena</text>
+        <circle class="t-ficha" cx="127" cy="348" r="26" stroke="#8a78d8"/><text class="t-letra" x="127" y="357">L</text><text class="t-nome" x="127" y="405">Lia</text>
+        <circle class="t-ficha" cx="70" cy="171" r="26" stroke="#4f8fcf"/><text class="t-letra" x="70" y="180">T</text><text class="t-nome" x="70" y="228">Tomé</text>
+      </svg>
+    </div>
+  </div></section>
 
-    <div class="cena" role="img" aria-label="Uma cena de combate do jogo: o grupo, o mapa da cripta e a narração">
-      <div class="barra"><b>A Coroa de Sal</b><span class="apagado">Cena 7 de 12</span></div>
-      <div class="corpo">
-        <div class="grupo">
-          <div class="heroi vez"><b>Bruk</b><div class="vida"><i style="width:82%"></i></div><span class="apagado">31 de 38</span></div>
-          <div class="heroi"><b>Sena</b><div class="vida"><i style="width:79%"></i></div><span class="apagado">19 de 24</span></div>
-          <div class="heroi"><b>Tomé</b><div class="vida baixa"><i style="width:33%"></i></div><span class="apagado">9 de 27</span></div>
+  <section class="faixa" id="quem"><div class="dentro">
+    <div class="cab"><span class="rot">Quem faz o quê</span><h2>O mestre conta a história e o jogo faz a conta.</h2><p>A IA narra bem e esquece quantos pontos de vida você tem. Por isso cada um fica com a sua parte.</p></div>
+    <div class="dois">
+      <div class="lado">
+        <h3>A cadeira do mestre</h3>
+        <ul>
+          <li>Narra cada cena e dá voz a quem vive no mundo.</li>
+          <li>Improvisa quando o grupo foge do roteiro.</li>
+          <li>Consulta a regra e diz de onde tirou.</li>
+          <li>Lembra do que aconteceu na sessão passada.</li>
+        </ul>
+      </div>
+      <div class="lado">
+        <h3>O que fica com o jogo</h3>
+        <ul>
+          <li>Rola os dados, ou aceita o seu dado de verdade.</li>
+          <li>Calcula ataque, dano, vida e condições.</li>
+          <li>Guarda as fichas e a campanha num arquivo seu.</li>
+          <li>Mostra o mapa e a vez de cada um.</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="faixa" id="mapa"><div class="dentro">
+    <div class="cab"><span class="rot">O mapa</span><h2>Veja o mapa de cima ou de lado.</h2></div>
+    <div class="mapa-demo">
+      <div class="palco" aria-hidden="true"><div class="tabuleiro" id="tabuleiro"></div></div>
+      <div class="comandos">
+        <p>De cima fica fácil medir a distância. Inclinando, as peças ficam em pé, como miniaturas de papel, e dá para girar a mesa e olhar em volta.</p>
+        <div class="botoes">
+          <button type="button" id="b-cima" aria-pressed="false">De cima</button>
+          <button type="button" id="b-lado" aria-pressed="true">De lado</button>
         </div>
-        <svg viewBox="0 0 320 240" aria-hidden="true">
-          <rect class="m-chao" x="20" y="20" width="200" height="160"/><rect class="m-chao" x="220" y="60" width="80" height="80"/><rect class="m-chao" x="60" y="180" width="40" height="40"/>
-          <path class="m-grade" d="M20 20h200v160H20zM60 20v200M100 20v200M140 20v160M180 20v160M220 60h80v80h-80M260 60v80M20 60h200M20 100h280M20 140h200M60 180h40v40H60"/>
-          <rect class="m-alcance" x="100" y="60" width="120" height="80"/>
-          <circle class="m-heroi m-vez" cx="120" cy="120" r="14"/><circle class="m-heroi" cx="80" cy="160" r="14"/><circle class="m-heroi" cx="80" cy="200" r="14"/>
-          <rect class="m-inim" x="186" y="66" width="28" height="28"/><rect class="m-inim" x="246" y="86" width="28" height="28"/>
-        </svg>
+        <div class="giro"><label for="giro" class="apagado">Girar a mesa</label><input type="range" id="giro" min="-180" max="180" value="24" step="1"></div>
       </div>
-      <div class="fala"><span>Narração</span><p>O machado abre o ombro do carniçal, que cambaleia mas não cai. Atrás dele, a porta de bronze range sozinha.</p></div>
     </div>
-  </div></section>
-
-  <section class="faixa" id="recursos"><div class="dentro">
-    <div class="abre"><h2>O que vem na caixa</h2></div>
-    <div class="grade">
-      <div class="cartao"><h3>Um mestre de IA</h3><p>Ele narra cada cena, interpreta os personagens do mundo e improvisa quando o grupo foge do roteiro.</p></div>
-      <div class="cartao"><h3>Mapa de cima e de lado</h3><p>Veja a masmorra de cima, como um mapa, ou de lado, como uma mesa de verdade. De lado, gire a câmera à vontade.</p></div>
-      <div class="cartao"><h3>As regras ficam com o jogo</h3><p>O mestre conta a história, mas quem rola o dado, faz a conta e guarda a ficha é o jogo. Dá para usar o seu dado de verdade e só dizer o resultado.</p></div>
-      <div class="cartao"><h3>Editor de aventuras</h3><p>Monte as suas: mapas, personagens e cenas, à mão ou pedindo à IA. O mestre usa o que você preparou.</p></div>
-      <div class="cartao"><h3>Traga a sua IA</h3><p>Três jeitos de ligar o mestre: pelo conector MCP, pelo Claude Code embutido no jogo ou com uma chave de API.</p></div>
-      <div class="cartao"><h3>Aberto e sem servidor nosso</h3><p>O código é aberto e o jogo roda nos computadores do grupo. Não existe conta na Távola, anúncio nem coleta de dados.</p></div>
-    </div>
-  </div></section>
-
-  <section class="faixa" id="como"><div class="dentro">
-    <div class="abre"><h2>Como funciona</h2></div>
-    <ol class="passos">
-      <li><h3>Baixe e abra</h3><p>Cada jogador baixa o jogo no próprio computador. Se o Windows avisar que não conhece o programa, veja a dúvida sobre isso mais abaixo.</p></li>
-      <li><h3>Abram a mesa</h3><p>Uma pessoa abre a mesa, liga a IA dela e escolhe a aventura. Os outros, na mesma rede, entram com o código que aparece na tela.</p></li>
-      <li><h3>Joguem</h3><p>Cada um escolhe o personagem e o tema. Daí em diante o mestre conduz, e a campanha fica salva para a próxima sessão.</p></li>
-    </ol>
   </div></section>
 
   <section class="faixa" id="temas"><div class="dentro">
-    <div class="abre"><h2>Oito temas, um para cada mesa</h2><p>Cada jogador escolhe a cara do próprio jogo. Experimente aqui: esta página inteira troca junto.</p></div>
-    <div class="temas" id="lista-temas"></div>
+    <div class="cab"><span class="rot">Temas</span><h2>Cada jogador escolhe a cara da própria mesa.</h2><p>São oito temas. Clique em um e esta página inteira troca junto.</p></div>
+    <div class="botoes temas" id="lista-temas"></div>
   </div></section>
 
-  <section class="faixa" id="duvidas"><div class="dentro">
-    <div class="abre"><h2>Dúvidas</h2></div>
-    <div>
-      <details><summary>É grátis mesmo?</summary><p>O jogo vai ser: código aberto, sem compra nem anúncio. A IA que faz o papel do mestre é por conta de quem abre a mesa.</p></details>
-      <details><summary>Preciso de inteligência artificial para jogar?</summary><p>Quem abre a mesa precisa: um plano do Claude ou uma chave de API. Os outros jogadores não precisam de nada além do jogo. Uma versão que roda sem IA está no roteiro.</p></details>
-      <details><summary>O Windows disse que protegeu o computador. E agora?</summary><p>O aviso aparece em programas sem assinatura digital paga. Escolha "Mais informações" e depois "Executar assim mesmo". O instalador é gerado a partir do código aberto, que qualquer pessoa pode conferir.</p></details>
-      <details><summary>Dá para jogar à distância?</summary><p>Por enquanto a mesa funciona com todos na mesma rede. O jogo à distância está no roteiro.</p></details>
-      <details><summary>Tem para Mac ou celular?</summary><p>Ainda não. Esta versão é para Windows e Linux.</p></details>
-      <details><summary>Que regras o jogo usa?</summary><p>As regras básicas e abertas de D&amp;D, em português. Dá para consultar qualquer regra dentro do jogo.</p></details>
+  <section class="faixa"><div class="dentro">
+    <div class="cab"><span class="rot">A IA</span><h2>Quem abre a mesa traz o mestre.</h2><p>Só uma pessoa do grupo precisa ter uma IA. Os outros instalam o jogo e entram. Há três jeitos de ligar:</p></div>
+    <div class="grade">
+      <div class="cartao"><h3>Pelo seu Claude</h3><p>Você conversa no Claude que já usa, e ele se liga ao jogo por um conector.</p></div>
+      <div class="cartao"><h3>Dentro do jogo</h3><p>O jogo abre o Claude Code que você tem instalado, e a conversa com o mestre acontece na própria mesa.</p></div>
+      <div class="cartao"><h3>Com uma chave</h3><p>Você cola uma chave de API e paga pelo que usar, direto ao fornecedor.</p></div>
     </div>
+    <p class="apagado">A Távola é grátis. A IA é por conta de quem abre a mesa.</p>
   </div></section>
 
-  <section class="faixa final"><div class="dentro">
+  <section class="faixa" id="diario"><div class="dentro">
+    <div class="cab"><span class="rot">Diário de construção</span><h2>Em que pé está.</h2><p>O jogo ainda está sendo feito. A ordem é esta:</p></div>
+    <ol class="diario">
+      <li class="agora"><span class="quando">Agora</span><div><h3>O motor</h3><p>Dados, fichas, combate, condições e a busca nas regras, jogado em texto. Serve para ver se a IA mestra bem quando a conta é do jogo.</p></div></li>
+      <li><span class="quando">Depois</span><div><h3>A mesa</h3><p>A conversa com o mestre dentro do jogo, com as fichas e as rolagens na tela.</p></div></li>
+      <li><span class="quando">Depois</span><div><h3>O mapa</h3><p>As duas visões, o giro e as peças, com o grupo em vários computadores na mesma rede.</p></div></li>
+      <li><span class="quando">Depois</span><div><h3>A voz</h3><p>O mestre falando em voz alta e os jogadores respondendo.</p></div></li>
+      <li><span class="quando">Depois</span><div><h3>O editor</h3><p>Para montar os seus mapas, personagens e aventuras.</p></div></li>
+      <li><span class="quando">Por fim</span><div><h3>O download</h3><p>Os oito temas, os instaladores e o botão desta página funcionando.</p></div></li>
+    </ol>
+  </div></section>
+
+  <section class="faixa fim"><div class="dentro">
     <h2>Puxem as cadeiras.</h2>
-    <div class="acoes">
-      <span class="botao embreve">Baixar para Windows · em breve</span>
-      <span class="botao vazado embreve">Baixar para Linux · em breve</span>
-    </div>
+    <span class="botao">Baixar · em breve</span>
   </div></section>
 
-  <footer class="rodape"><div class="dentro">
-    <span>Távola, 2026. Feito sem pretensão.</span>
-    <span>O código será aberto junto com a primeira versão · Regras básicas de D&amp;D usadas sob licença aberta</span>
-  </div></footer>
+  <footer class="rodape"><div class="dentro">Távola, 2026. Feito sem pretensão.</div></footer>
 </div>
 
 <script>
 (function () {
-  var TEMAS = [["terras-antigas", "Terras antigas", "#2f4a34"], ["mesa-a-noite", "Mesa à noite", "#cfa650"], ["tavola-redonda", "Távola Redonda", "#7a1f2b"], ["salao-elfico", "Salão élfico", "#a8d8cf"], ["forja-ana", "Forja anã", "#e8742a"], ["reino-sombrio", "Reino sombrio", "#d23a2a"], ["vila-das-colinas", "Vila das colinas", "#4d7a3a"], ["grimorio-arcano", "Grimório arcano", "#c9a8ff"]];
-  var pagina = document.getElementById("pagina"), lista = document.getElementById("lista-temas");
+  var $ = function (id) { return document.getElementById(id); };
+  var pagina = $("pagina");
+
+  // ---- temas ----
+  var TEMAS = [["mesa-a-noite", "Mesa à noite", "#cfa650"], ["terras-antigas", "Terras antigas", "#2f4a34"], ["tavola-redonda", "Távola Redonda", "#7a1f2b"], ["salao-elfico", "Salão élfico", "#a8d8cf"], ["forja-ana", "Forja anã", "#e8742a"], ["reino-sombrio", "Reino sombrio", "#d23a2a"], ["vila-das-colinas", "Vila das colinas", "#4d7a3a"], ["grimorio-arcano", "Grimório arcano", "#c9a8ff"]];
+  var lista = $("lista-temas");
   function usar(id) {
     pagina.setAttribute("data-tema", id);
     document.body.style.background = getComputedStyle(pagina).getPropertyValue("--fundo");
@@ -205,7 +225,43 @@ details p { padding-top: 8px; }
     b.addEventListener("click", function () { usar(t[0]); }); lista.appendChild(b);
   });
   var guardado = null; try { guardado = localStorage.getItem("tavola-tema"); } catch (e) {}
-  usar(TEMAS.some(function (t) { return t[0] === guardado; }) ? guardado : "terras-antigas");
+  usar(TEMAS.some(function (t) { return t[0] === guardado; }) ? guardado : "mesa-a-noite");
+
+  // ---- o mapa que inclina e gira ----
+  function busto(c) {
+    var s = '<path d="M12 100 Q12 68 50 66 Q88 68 88 100 Z" fill="' + c.roupa + '"/><rect x="43" y="56" width="14" height="14" fill="' + c.pele + '"/><circle cx="50" cy="44" r="20" fill="' + c.pele + '"/>';
+    var olhos = '<circle cx="43" cy="44" r="2.4" fill="#2b2113"/><circle cx="57" cy="44" r="2.4" fill="#2b2113"/>';
+    if (c.tipo === "guerreiro") s += olhos + '<path d="M30 42 Q32 20 50 20 Q68 20 70 42 Q60 30 50 30 Q40 30 30 42Z" fill="' + c.cabelo + '"/><path d="M31 48 Q50 92 69 48 Q60 58 50 58 Q40 58 31 48Z" fill="' + c.cabelo + '"/>';
+    else if (c.tipo === "ladina") s += olhos + '<path d="M22 68 Q18 12 50 10 Q82 12 78 68 Q72 30 50 28 Q28 30 22 68Z" fill="' + c.roupa + '"/>';
+    else if (c.tipo === "maga") s += olhos + '<path d="M31 40 Q24 70 36 76 L37 46Z M69 40 Q76 70 64 76 L63 46Z" fill="' + c.cabelo + '"/><path d="M28 32 L52 4 L72 32 Z" fill="' + c.roupa + '"/><ellipse cx="50" cy="32" rx="34" ry="7" fill="' + c.roupa + '"/>';
+    else if (c.tipo === "clerigo") s += olhos + '<path d="M30 42 Q32 22 50 22 Q68 22 70 42 Q50 32 30 42Z" fill="' + c.cabelo + '"/><circle cx="50" cy="86" r="6" fill="#cfa650"/>';
+    else s += '<circle cx="42" cy="42" r="5" fill="#1a1a14"/><circle cx="58" cy="42" r="5" fill="#1a1a14"/><path d="M40 55 H60" stroke="#1a1a14" stroke-width="2"/>';
+    return s;
+  }
+  var PECAS = [
+    { tipo: "guerreiro", cor: "#a8771c", pele: "#d9a37a", cabelo: "#8a3d1c", roupa: "#6f7a80", x: 42, y: 50 },
+    { tipo: "ladina", cor: "#2f8f78", pele: "#b9835c", cabelo: "#2a1d14", roupa: "#3b4a3a", x: 25, y: 70 },
+    { tipo: "maga", cor: "#8a78d8", pele: "#e3b99a", cabelo: "#d9c27a", roupa: "#3d3470", x: 25, y: 30 },
+    { tipo: "clerigo", cor: "#4f8fcf", pele: "#8a5a3c", cabelo: "#d8d2c4", roupa: "#e6dcc0", x: 42, y: 90 },
+    { tipo: "inimigo", cor: "#c8574a", pele: "#9aa88a", cabelo: "#3b3b30", roupa: "#3b3b30", x: 75, y: 30 },
+    { tipo: "inimigo", cor: "#c8574a", pele: "#9aa88a", cabelo: "#3b3b30", roupa: "#3b3b30", x: 75, y: 70 }
+  ];
+  var tab = $("tabuleiro");
+  PECAS.forEach(function (c) {
+    var p = document.createElement("div"); p.className = "peca"; p.style.left = c.x + "%"; p.style.top = c.y + "%"; p.style.setProperty("--cor", c.cor);
+    p.innerHTML = '<div class="sombra"></div><div class="ficha"><svg viewBox="0 0 100 100"><g transform="translate(0,6)">' + busto(c) + '</g></svg></div><div class="pe"><svg viewBox="8 6 84 94" preserveAspectRatio="xMidYMax slice">' + busto(c) + '</svg></div>';
+    tab.appendChild(p);
+  });
+  function visao(lado) {
+    tab.style.setProperty("--a", lado ? "56deg" : "0deg");
+    tab.style.setProperty("--alt", lado ? "1" : "0.001");
+    tab.style.setProperty("--op", lado ? "0" : "1");
+    $("b-cima").setAttribute("aria-pressed", String(!lado)); $("b-lado").setAttribute("aria-pressed", String(lado));
+  }
+  $("b-cima").addEventListener("click", function () { visao(false); });
+  $("b-lado").addEventListener("click", function () { visao(true); });
+  $("giro").addEventListener("input", function () { tab.style.setProperty("--g", this.value + "deg"); });
+  visao(true);
 })();
 </script>
 </body>
