@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Távola · RPG de mesa sem mestre</title>
+<meta name="description" content="Távola é um jogo de RPG de mesa para grupos sem mestre. O jogo conduz a aventura: narra, mostra o mapa, rola os dados e joga os inimigos. Grátis e de código aberto.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=Almendra:wght@400;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fondamento&family=Germania+One&family=Grenze+Gotisch:wght@500;700&family=IM+Fell+English&family=Lora:wght@400;600&family=Marcellus&family=Uncial+Antiqua&display=swap">
+<style>
+/* Layout: página de entrada do jogo. Cabeçalho, chamada com o botão de baixar e uma cena do jogo, recursos, três passos, os oito temas (que trocam a cara da própria página), dúvidas e rodapé. Toda cor e letra vem das variáveis do tema. */
+:root { --fundo: #e8dcb9; }
+.pagina {
+  --fundo: #e8dcb9; --painel: #f1e8cb; --chao: #d8c99d; --linha: #7b6234; --texto: #2b2113; --apagado: #5f4d2c; --destaque: #2f4a34; --no-destaque: #f1e8cb; --perigo: #8a2a1c; --bom: #2f4a34;
+  --titulo: "Almendra", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --raio: 0px; --peso-titulo: 700;
+}
+.pagina[data-tema="mesa-a-noite"] { --fundo: #0e1719; --painel: #1c2d31; --chao: #22363a; --linha: #2c4247; --texto: #e9e0c9; --apagado: #9aa79f; --destaque: #cfa650; --no-destaque: #1a1405; --perigo: #c8574a; --bom: #7fb069; --titulo: "IM Fell English", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --peso-titulo: 400; }
+.pagina[data-tema="tavola-redonda"] { --fundo: #430c17; --painel: #5e1423; --chao: #6d1a2b; --linha: #d9b24c; --texto: #f5ead0; --apagado: #dcc7a4; --destaque: #e3bd55; --no-destaque: #2a0810; --perigo: #120a0c; --bom: #e3bd55; --titulo: "Uncial Antiqua", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --peso-titulo: 400; }
+.pagina[data-tema="salao-elfico"] { --fundo: #0f1d24; --painel: #17303a; --chao: #1c3a45; --linha: #5f8f8a; --texto: #e6f0ee; --apagado: #a5bdb9; --destaque: #a8d8cf; --no-destaque: #0f1d24; --perigo: #d9667a; --bom: #8fd0a0; --titulo: "Marcellus", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; --raio: 14px; --peso-titulo: 400; }
+.pagina[data-tema="forja-ana"] { --fundo: #1c1b1a; --painel: #2b2927; --chao: #33302d; --linha: #5a544d; --texto: #ece6dc; --apagado: #a9a196; --destaque: #e8742a; --no-destaque: #1c1107; --perigo: #c23b2e; --bom: #9fb36a; --titulo: "Germania One", "Segoe UI", sans-serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --peso-titulo: 400; }
+.pagina[data-tema="reino-sombrio"] { --fundo: #0b0b0c; --painel: #18171a; --chao: #201e22; --linha: #3a363c; --texto: #d9d4cc; --apagado: #918b93; --destaque: #d23a2a; --no-destaque: #ffffff; --perigo: #d23a2a; --bom: #7d8a6a; --titulo: "Grenze Gotisch", Georgia, serif; --corpo: "EB Garamond", Georgia, serif; }
+.pagina[data-tema="vila-das-colinas"] { --fundo: #f4efd9; --painel: #fbf6e6; --chao: #dfe6bf; --linha: #b9a77a; --texto: #33291b; --apagado: #6a5a41; --destaque: #3f6630; --no-destaque: #ffffff; --perigo: #b5482f; --bom: #4d7a3a; --titulo: "Fondamento", Georgia, serif; --corpo: "Alegreya Sans", "Segoe UI", sans-serif; --raio: 12px; --peso-titulo: 400; }
+.pagina[data-tema="grimorio-arcano"] { --fundo: #150f2b; --painel: #221a45; --chao: #2a2157; --linha: #5a4a9c; --texto: #ece7ff; --apagado: #b3a9da; --destaque: #c9a8ff; --no-destaque: #150f2b; --perigo: #ff6f91; --bom: #7fe0c0; --titulo: "Cinzel", Georgia, serif; --corpo: "Lora", Georgia, serif; --raio: 4px; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); }
+.pagina { background: var(--fundo); color: var(--texto); font-family: var(--corpo); font-size: 19px; line-height: 1.5; min-height: 100%; }
+.dentro { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+h1, h2, h3 { font-family: var(--titulo); font-weight: var(--peso-titulo); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(38px, 6.4vw, 68px); line-height: 1.04; }
+h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
+h3 { font-size: 23px; line-height: 1.2; }
+p { margin: 0; }
+a { color: var(--texto); }
+.apagado { color: var(--apagado); }
+:focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; }
+
+.topo { border-bottom: 1px solid var(--linha); }
+.topo .dentro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-block: 14px; }
+.marca { display: flex; align-items: center; gap: 10px; font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 28px; text-decoration: none; }
+.marca svg { width: 34px; height: 34px; flex: none; }
+.menu { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 18px; }
+.menu a { text-decoration: none; padding-block: 10px; }
+.menu a:hover { text-decoration: underline; }
+
+.chamada .dentro { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px; align-items: center; padding-block: clamp(36px, 7vw, 80px); }
+.chamada .texto { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.selos { color: var(--apagado); font-size: 17px; }
+.acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.botao { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 10px 26px; font-family: var(--corpo); font-size: 20px; font-weight: 700; text-decoration: none; border: 2px solid var(--destaque); border-radius: var(--raio); background: var(--destaque); color: var(--no-destaque); }
+.botao.vazado { background: transparent; color: var(--texto); border-color: var(--linha); font-weight: 400; }
+.botao.embreve { opacity: 0.6; cursor: default; }
+.obra { background: var(--painel); border-bottom: 1px solid var(--linha); font-size: 17px; }
+.obra .dentro { display: block; padding-block: 10px; }
+
+.cena { min-width: 0; background: var(--painel); border: 2px solid var(--linha); border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; font-size: 16px; }
+.cena .barra { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--linha); }
+.cena .barra b { font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 22px; }
+.cena .corpo { display: grid; grid-template-columns: 138px minmax(0, 1fr); }
+.cena .grupo { padding: 10px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--linha); background: var(--fundo); }
+.heroi { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 6px 9px; display: flex; flex-direction: column; gap: 4px; }
+.heroi.vez { border: 2px solid var(--destaque); }
+.heroi b { font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 17px; }
+.vida { height: 6px; background: var(--fundo); } .vida i { display: block; height: 100%; background: var(--bom); } .vida.baixa i { background: var(--perigo); }
+.cena svg { display: block; width: 100%; height: auto; background: var(--fundo); }
+.m-chao { fill: var(--chao); } .m-grade { stroke: var(--linha); fill: none; opacity: 0.7; } .m-alcance { fill: var(--destaque); fill-opacity: 0.2; }
+.m-heroi { fill: var(--painel); stroke: var(--texto); stroke-width: 2; } .m-vez { stroke: var(--destaque); stroke-width: 4; } .m-inim { fill: var(--perigo); stroke: var(--texto); stroke-width: 1.5; }
+.cena .fala { padding: 12px 14px; border-top: 1px solid var(--linha); display: flex; flex-direction: column; gap: 2px; }
+.cena .fala span { font-size: 14px; color: var(--apagado); }
+.cena .fala p { font-size: 19px; font-style: italic; line-height: 1.3; }
+
+.faixa { border-top: 1px solid var(--linha); }
+.faixa .dentro { padding-block: clamp(40px, 6vw, 72px); display: flex; flex-direction: column; gap: 26px; }
+.faixa .abre { display: flex; flex-direction: column; gap: 8px; max-width: 62ch; }
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.cartao { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+ol.passos { list-style: none; margin: 0; padding: 0; counter-reset: passo; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; }
+ol.passos li { counter-increment: passo; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+ol.passos li::before { content: counter(passo); font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 44px; line-height: 1; color: var(--destaque); }
+.temas { display: flex; flex-wrap: wrap; gap: 10px; }
+.temas button { font-family: var(--corpo); font-size: 18px; cursor: pointer; min-height: 48px; padding: 8px 16px; background: var(--painel); color: var(--texto); border: 1px solid var(--linha); border-radius: var(--raio); display: inline-flex; align-items: center; gap: 10px; }
+.temas button i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--linha); flex: none; }
+.temas button[aria-pressed="true"] { border: 2px solid var(--destaque); font-weight: 700; }
+details { border-bottom: 1px solid var(--linha); padding-block: 14px; max-width: 76ch; }
+summary { cursor: pointer; font-family: var(--titulo); font-weight: var(--peso-titulo); font-size: 22px; }
+details p { padding-top: 8px; }
+.final .dentro { align-items: center; text-align: center; }
+.final .acoes { justify-content: center; }
+.rodape { border-top: 1px solid var(--linha); font-size: 17px; }
+.rodape .dentro { padding-block: 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; color: var(--apagado); }
+.rodape a { color: var(--apagado); }
+</style>
+</head>
+<body>
+<div class="pagina" id="pagina" data-tema="terras-antigas">
+
+  <header class="topo"><div class="dentro">
+    <a class="marca" href="#inicio">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="currentColor"/><path d="M20 3V12 M20 28V37 M3 20H12 M28 20H37 M8 8L14.4 14.4 M25.6 25.6L32 32 M32 8L25.6 14.4 M14.4 25.6L8 32" stroke="currentColor" stroke-width="2"/></svg>
+      Távola
+    </a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#recursos">Recursos</a><a href="#como">Como funciona</a><a href="#temas">Temas</a><a href="#duvidas">Dúvidas</a>
+    </nav>
+  </div></header>
+
+  <p class="obra"><span class="dentro">Em construção. O jogo ainda está sendo feito e não há versão para baixar. Esta página mostra o que ele vai ser.</span></p>
+
+  <section class="chamada" id="inicio"><div class="dentro">
+    <div class="texto">
+      <p class="selos">Grátis · Código aberto · Windows e Linux</p>
+      <h1>Uma mesa de RPG sem cabeceira.</h1>
+      <p>Na távola redonda ninguém senta na ponta. Aqui o jogo conduz a aventura no lugar do mestre: narra, mostra o mapa, rola os dados e joga os inimigos. O grupo só joga.</p>
+      <div class="acoes">
+        <span class="botao embreve">Baixar para Windows · em breve</span>
+        <span class="botao vazado embreve">Baixar para Linux · em breve</span>
+      </div>
+      <p class="apagado">Sem conta, sem assinatura e sem internet para jogar.</p>
+    </div>
+
+    <div class="cena" role="img" aria-label="Uma cena de combate do jogo: o grupo, o mapa da cripta e a narração">
+      <div class="barra"><b>A Coroa de Sal</b><span class="apagado">Cena 7 de 12</span></div>
+      <div class="corpo">
+        <div class="grupo">
+          <div class="heroi vez"><b>Bruk</b><div class="vida"><i style="width:82%"></i></div><span class="apagado">31 de 38</span></div>
+          <div class="heroi"><b>Sena</b><div class="vida"><i style="width:79%"></i></div><span class="apagado">19 de 24</span></div>
+          <div class="heroi"><b>Tomé</b><div class="vida baixa"><i style="width:33%"></i></div><span class="apagado">9 de 27</span></div>
+        </div>
+        <svg viewBox="0 0 320 240" aria-hidden="true">
+          <rect class="m-chao" x="20" y="20" width="200" height="160"/><rect class="m-chao" x="220" y="60" width="80" height="80"/><rect class="m-chao" x="60" y="180" width="40" height="40"/>
+          <path class="m-grade" d="M20 20h200v160H20zM60 20v200M100 20v200M140 20v160M180 20v160M220 60h80v80h-80M260 60v80M20 60h200M20 100h280M20 140h200M60 180h40v40H60"/>
+          <rect class="m-alcance" x="100" y="60" width="120" height="80"/>
+          <circle class="m-heroi m-vez" cx="120" cy="120" r="14"/><circle class="m-heroi" cx="80" cy="160" r="14"/><circle class="m-heroi" cx="80" cy="200" r="14"/>
+          <rect class="m-inim" x="186" y="66" width="28" height="28"/><rect class="m-inim" x="246" y="86" width="28" height="28"/>
+        </svg>
+      </div>
+      <div class="fala"><span>Narração</span><p>O machado abre o ombro do carniçal, que cambaleia mas não cai. Atrás dele, a porta de bronze range sozinha.</p></div>
+    </div>
+  </div></section>
+
+  <section class="faixa" id="recursos"><div class="dentro">
+    <div class="abre"><h2>O que vem na caixa</h2></div>
+    <div class="grade">
+      <div class="cartao"><h3>O jogo é o mestre</h3><p>A aventura já vem escrita. O jogo narra cada cena, oferece os caminhos e resolve os combates pelas regras.</p></div>
+      <div class="cartao"><h3>Mapa de cima e de lado</h3><p>Veja a masmorra de cima, como um mapa, ou de lado, como uma mesa de verdade. De lado, gire a câmera à vontade.</p></div>
+      <div class="cartao"><h3>Dado na tela ou na mão</h3><p>Role pelo jogo ou jogue o seu dado de verdade e diga o resultado. A conta ele faz.</p></div>
+      <div class="cartao"><h3>Editor de aventuras</h3><p>Monte as suas: mapas, personagens, cenas e finais. O jogo confere se o combate está justo e se todo caminho tem saída.</p></div>
+      <div class="cartao"><h3>Crie com a sua IA, se quiser</h3><p>Quem usa o Claude ou outra IA pode pedir uma aventura inteira pelo conector e ajustar no editor. Para jogar, não precisa de IA nenhuma.</p></div>
+      <div class="cartao"><h3>Aberto e sem servidor</h3><p>O código é aberto e tudo roda nos computadores do grupo. Não existe conta, anúncio nem coleta de dados.</p></div>
+    </div>
+  </div></section>
+
+  <section class="faixa" id="como"><div class="dentro">
+    <div class="abre"><h2>Como funciona</h2></div>
+    <ol class="passos">
+      <li><h3>Baixe e abra</h3><p>Cada jogador baixa o jogo no próprio computador. Se o Windows avisar que não conhece o programa, veja a dúvida sobre isso mais abaixo.</p></li>
+      <li><h3>Abram a mesa</h3><p>Uma pessoa abre a mesa e escolhe a aventura. Os outros, na mesma rede, entram com o código que aparece na tela.</p></li>
+      <li><h3>Joguem</h3><p>Cada um escolhe o personagem e o tema. Daí em diante o jogo conduz, e a campanha fica salva para a próxima sessão.</p></li>
+    </ol>
+  </div></section>
+
+  <section class="faixa" id="temas"><div class="dentro">
+    <div class="abre"><h2>Oito temas, um para cada mesa</h2><p>Cada jogador escolhe a cara do próprio jogo. Experimente aqui: esta página inteira troca junto.</p></div>
+    <div class="temas" id="lista-temas"></div>
+  </div></section>
+
+  <section class="faixa" id="duvidas"><div class="dentro">
+    <div class="abre"><h2>Dúvidas</h2></div>
+    <div>
+      <details><summary>É grátis mesmo?</summary><p>Vai ser. O jogo será de código aberto, sem compra, assinatura nem anúncio.</p></details>
+      <details><summary>Preciso de inteligência artificial para jogar?</summary><p>Não. As aventuras já vêm escritas e o jogo roda sem internet. A IA é opcional e serve só para quem quer criar aventuras mais rápido.</p></details>
+      <details><summary>O Windows disse que protegeu o computador. E agora?</summary><p>O aviso aparece em programas sem assinatura digital paga. Escolha "Mais informações" e depois "Executar assim mesmo". O instalador é gerado a partir do código aberto, que qualquer pessoa pode conferir.</p></details>
+      <details><summary>Dá para jogar à distância?</summary><p>Por enquanto a mesa funciona com todos na mesma rede. O jogo à distância está no roteiro.</p></details>
+      <details><summary>Tem para Mac ou celular?</summary><p>Ainda não. Esta versão é para Windows e Linux.</p></details>
+      <details><summary>Que regras o jogo usa?</summary><p>As regras básicas e abertas de D&amp;D, em português. Dá para consultar qualquer regra dentro do jogo.</p></details>
+    </div>
+  </div></section>
+
+  <section class="faixa final"><div class="dentro">
+    <h2>Puxem as cadeiras.</h2>
+    <div class="acoes">
+      <span class="botao embreve">Baixar para Windows · em breve</span>
+      <span class="botao vazado embreve">Baixar para Linux · em breve</span>
+    </div>
+  </div></section>
+
+  <footer class="rodape"><div class="dentro">
+    <span>Távola, 2026. Feito sem pretensão.</span>
+    <span>O código será aberto junto com a primeira versão · Regras básicas de D&amp;D usadas sob licença aberta</span>
+  </div></footer>
+</div>
+
+<script>
+(function () {
+  var TEMAS = [["terras-antigas", "Terras antigas", "#2f4a34"], ["mesa-a-noite", "Mesa à noite", "#cfa650"], ["tavola-redonda", "Távola Redonda", "#7a1f2b"], ["salao-elfico", "Salão élfico", "#a8d8cf"], ["forja-ana", "Forja anã", "#e8742a"], ["reino-sombrio", "Reino sombrio", "#d23a2a"], ["vila-das-colinas", "Vila das colinas", "#4d7a3a"], ["grimorio-arcano", "Grimório arcano", "#c9a8ff"]];
+  var pagina = document.getElementById("pagina"), lista = document.getElementById("lista-temas");
+  function usar(id) {
+    pagina.setAttribute("data-tema", id);
+    document.body.style.background = getComputedStyle(pagina).getPropertyValue("--fundo");
+    Array.prototype.forEach.call(lista.children, function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-id") === id)); });
+    try { localStorage.setItem("tavola-tema", id); } catch (e) {}
+  }
+  TEMAS.forEach(function (t) {
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("data-id", t[0]);
+    var i = document.createElement("i"); i.style.background = t[2]; b.appendChild(i); b.appendChild(document.createTextNode(t[1]));
+    b.addEventListener("click", function () { usar(t[0]); }); lista.appendChild(b);
+  });
+  var guardado = null; try { guardado = localStorage.getItem("tavola-tema"); } catch (e) {}
+  usar(TEMAS.some(function (t) { return t[0] === guardado; }) ? guardado : "terras-antigas");
+})();
+</script>
+</body>
+</html>
